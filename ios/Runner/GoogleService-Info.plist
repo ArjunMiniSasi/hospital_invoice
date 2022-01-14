@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>9365348600-osf0am7tdacb4ar9d5381ckqa8ajrqv8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.9365348600-osf0am7tdacb4ar9d5381ckqa8ajrqv8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>9365348600-ed00q3hopp79vafcnuhi8avlc3cmgtph.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAfOuimTH66-Sohz0UfC9W7J4rfksH0ynE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>9365348600</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.vam.hospitalinvoice</string>
+	<key>PROJECT_ID</key>
+	<string>vams-library-management</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vams-library-management.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:9365348600:ios:3f51459aaf94f1b169db0d</string>
+	<key>DATABASE_URL</key>
+	<string>https://vams-library-management-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "9365348600",
+    "firebase_url": "https://vams-library-management-default-rtdb.firebaseio.com",
+    "project_id": "vams-library-management",
+    "storage_bucket": "vams-library-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9365348600:android:86f3f5132388fb1869db0d",
+        "android_client_info": {
+          "package_name": "com.vam.hospitalinvoice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9365348600-ed00q3hopp79vafcnuhi8avlc3cmgtph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vam.hospitalinvoice",
+            "certificate_hash": "98d5e19b7380fd28f9e92503cf01b685b1269c4d"
+          }
+        },
+        {
+          "client_id": "9365348600-t5dn20796do65q3f9cd9naiobsd4m26k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpB2vWYE0n8wiK1LV59Cb2Q7cEQ_sA0mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9365348600-t5dn20796do65q3f9cd9naiobsd4m26k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "9365348600-c6c7cp8se8874t850o0jmdggooblmsk1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vams.medicineinventory"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9365348600:android:2be60e350101bd3669db0d",
+        "android_client_info": {
+          "package_name": "com.vams.medicineinventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9365348600-msd1j9ngjvl1421p7r8ujgj5irhcum7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vams.medicineinventory",
+            "certificate_hash": "98d5e19b7380fd28f9e92503cf01b685b1269c4d"
+          }
+        },
+        {
+          "client_id": "9365348600-t5dn20796do65q3f9cd9naiobsd4m26k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpB2vWYE0n8wiK1LV59Cb2Q7cEQ_sA0mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9365348600-t5dn20796do65q3f9cd9naiobsd4m26k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "9365348600-c6c7cp8se8874t850o0jmdggooblmsk1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vams.medicineinventory"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hospital_invoice">
+    package="com.vam.hospitalinvoice">
+
+    
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="hospital_invoice"
         android:icon="@mipmap/ic_launcher">
