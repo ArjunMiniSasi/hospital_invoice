@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_invoice/controller/homepage_controller.dart';
 import 'package:hospital_invoice/controller/order_controller.dart';
+import 'package:hospital_invoice/controller/pdf_controller.dart';
 import 'package:provider/provider.dart';
 
 import 'screen/homepage.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<OrderController>(
           create: (_) => OrderController(),
+        ),
+        ChangeNotifierProvider<PdfController>(
+          create: (_) => PdfController(),
         ),
       ],
       child: const MaterialApp(

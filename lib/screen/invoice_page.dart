@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_invoice/controller/order_controller.dart';
+import 'package:hospital_invoice/controller/pdf_controller.dart';
 import 'package:hospital_invoice/gen/assets.gen.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
 import 'package:provider/provider.dart';
@@ -152,27 +153,36 @@ class _InvoicePageState extends State<InvoicePage> {
                       ],
                     )),
               ),
-              InkWell(
-                onTap: () {
-                  myType.placeOrder(context);
+              Consumer<PdfController>(
+                builder: (context, pdfController, child) {
+                  return InkWell(
+                    onTap: () {
+                      // myType.placeOrder(context);
+                      pdfController.createPDF(myType.selectedMedicines, [
+                        "take fruits",
+                        "Drink 2 liters of water",
+                        "Eat 2 pieces of bread",
+                      ]);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text("Confirm order",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            )),
+                      ),
+                    ),
+                  );
                 },
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text("Confirm order",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        )),
-                  ),
-                ),
               )
             ],
           ),
