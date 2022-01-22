@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 
-// import 'dart:js' as js;
+import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
@@ -250,6 +251,15 @@ class PdfController extends ChangeNotifier {
             graphics.clientSize.width, graphics.clientSize.height - 100));
 
     List<int> bytes = document.save();
+
+    // Syncfusion Web support Code Snippet //
+    js.context['pdfData'] = base64.encode(bytes);
+    js.context['filename'] = 'Output.pdf';
+    Timer.run(() {
+      js.context.callMethod('download');
+    });
+    // Code Snippet ends here !!
+
     if (Platform.isIOS || Platform.isAndroid) {
       savePdfInDevice(bytes);
     }
