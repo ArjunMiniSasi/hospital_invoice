@@ -5,6 +5,7 @@ class MedicineModel {
   String code_value;
   String description;
   String expiryDate;
+  String manufacturer;
   String hospitalId;
   String productName;
   Timestamp listedTimeStamp;
@@ -24,6 +25,7 @@ class MedicineModel {
       required this.expiryDate,
       required this.hospitalId,
       required this.listedTimeStamp,
+      required this.manufacturer,
       required this.mobile,
       required this.productType,
       required this.quantity,

@@ -23,6 +23,7 @@ class FirestoreService {
               authorizedBy: medicine["authorizedBy"],
               code_value: medicine["code_value"],
               description: medicine["description"],
+              manufacturer: medicine["manufacturer"],
               expiryDate: medicine["expiryDate"],
               hospitalId: medicine["hospitalId"],
               listedTimeStamp: medicine["listedTimeStamp"],

@@ -28,10 +28,22 @@ class HomepageController extends ChangeNotifier {
     filteredMedicine = query == ""
         ? allMedicine
         : allMedicine
-            .where((medicine) => medicine.productName
-                .toLowerCase()
-                .contains(query.toLowerCase()))
+            .where((medicine) => checkSearchedText(query, medicine))
             .toList();
     notifyListeners();
+  }
+
+  checkSearchedText(String query, MedicineModel medicine) {
+    if (medicine.description.toLowerCase().contains(query.toLowerCase()) ||
+        medicine.productName.toLowerCase().contains(query.toLowerCase()) ||
+        medicine.manufacturer.toLowerCase().contains(query.toLowerCase()) ||
+        medicine.expiryDate
+            .toString()
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
