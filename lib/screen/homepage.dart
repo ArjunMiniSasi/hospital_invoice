@@ -90,12 +90,29 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class MedicineList extends StatelessWidget {
+class MedicineList extends StatefulWidget {
   final HomepageController myType;
+
   const MedicineList({
     Key? key,
     required this.myType,
   }) : super(key: key);
+
+  @override
+  State<MedicineList> createState() => _MedicineListState();
+}
+
+class _MedicineListState extends State<MedicineList> {
+  late OrderController _orderController;
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _orderController = Provider.of<OrderController>(context, listen: false);
+      _orderController.autoAddToCart(
+          widget.myType.filteredMedicine, ["metacam", "pet vita d"]);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +120,10 @@ class MedicineList extends StatelessWidget {
       builder: (context, orderController, child) {
         return Expanded(
           child: ListView.builder(
-            itemCount: myType.filteredMedicine.length,
+            itemCount: widget.myType.filteredMedicine.length,
             itemBuilder: (BuildContext context, int index) {
-              MedicineModel medicineModel = myType.filteredMedicine[index];
+              MedicineModel medicineModel =
+                  widget.myType.filteredMedicine[index];
               return Container(
                 margin: const EdgeInsets.all(8.0),
                 width: double.infinity,
@@ -181,7 +199,7 @@ class MedicineList extends StatelessWidget {
                           )
                         ],
                       ),
-                      myType.filteredMedicine[index].quantity == 0
+                      widget.myType.filteredMedicine[index].quantity == 0
                           ? Assets.openBox.image(height: 30)
                           : InkWell(
                               onTap: () {

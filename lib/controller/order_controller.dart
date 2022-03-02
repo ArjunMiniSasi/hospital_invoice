@@ -12,6 +12,16 @@ class OrderController extends ChangeNotifier {
     notifyListeners();
   }
 
+  autoAddToCart(List<MedicineModel> filteredMedicine, List<String> names) {
+    for (String item in names) {
+      for (var medicine in filteredMedicine) {
+        if (medicine.productName.toLowerCase() == item.toLowerCase()) {
+          addMedicine(medicine);
+        }
+      }
+    }
+  }
+
   void removeMedicine(MedicineModel medicine) {
     selectedMedicines.remove(medicine);
     notifyListeners();
