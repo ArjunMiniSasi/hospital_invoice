@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_invoice/constant/constant.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
 import 'package:hospital_invoice/screen/homepage.dart';
 
@@ -7,6 +8,15 @@ class FirestoreService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference inventory =
       FirebaseFirestore.instance.collection('inventory');
+  CollectionReference procedure =
+      FirebaseFirestore.instance.collection('procedure');
+
+  getAllProcedure() async {
+    QuerySnapshot querySnapshot = await procedure.get();
+    List<QueryDocumentSnapshot<Object?>> docs = querySnapshot.docs;
+    var data = docs[0].data() as Map;
+    procedureList = data["procedure"];
+  }
 
   //get all inventory documents
   getAllInventoryDocs() async {

@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_invoice/firebase/firestore_helper.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
+import 'package:hospital_invoice/model/procedure_model.dart';
 
 class OrderController extends ChangeNotifier {
   List<MedicineModel> selectedMedicines = [];
+  List<ProcedureModel> selectedProcedures = [];
 
   get filteredMedicine => null;
 
   void addMedicine(MedicineModel medicine) {
     selectedMedicines.add(medicine);
+    notifyListeners();
+  }
+
+  void addProcedure(ProcedureModel procedure) {
+    selectedProcedures.add(procedure);
+    notifyListeners();
+  }
+
+  void removeProcedure(ProcedureModel procedureModel) {
+    selectedProcedures.remove(procedureModel);
     notifyListeners();
   }
 

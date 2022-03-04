@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_invoice/controller/homepage_controller.dart';
 import 'package:hospital_invoice/controller/order_controller.dart';
+import 'package:hospital_invoice/firebase/firestore_helper.dart';
 import 'package:hospital_invoice/gen/assets.gen.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
 import 'package:hospital_invoice/screen/cofirm_order_page.dart';
@@ -23,6 +24,7 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     _controller = Provider.of<HomepageController>(context, listen: false);
     _controller.getAllMedicine();
+    FirestoreService().getAllProcedure();
     super.initState();
   }
 
@@ -108,8 +110,10 @@ class _MedicineListState extends State<MedicineList> {
   void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _orderController = Provider.of<OrderController>(context, listen: false);
-      _orderController.autoAddToCart(
-          widget.myType.filteredMedicine, ["metacam", "pet vita d"]);
+      _orderController.autoAddToCart(widget.myType.filteredMedicine, [
+        "metacam",
+        "pet vita d"
+      ]); //use this function to send the default medicine name
     });
     super.initState();
   }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hospital_invoice/constant/constant.dart';
 import 'package:hospital_invoice/controller/order_controller.dart';
 import 'package:hospital_invoice/controller/pdf_controller.dart';
 import 'package:hospital_invoice/gen/assets.gen.dart';
 import 'package:hospital_invoice/model/medicine_model.dart';
+import 'package:hospital_invoice/model/procedure_model.dart';
+import 'package:hospital_invoice/widget/medicine_tile.dart';
+import 'package:hospital_invoice/widget/procedure_tile.dart';
 import 'package:provider/provider.dart';
 
 class InvoicePage extends StatefulWidget {
@@ -13,6 +17,15 @@ class InvoicePage extends StatefulWidget {
 }
 
 class _InvoicePageState extends State<InvoicePage> {
+  final TextEditingController _priceController = TextEditingController();
+  String value = "SURGERY";
+
+  @override
+  void dispose() {
+    _priceController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<OrderController>(
@@ -25,110 +38,81 @@ class _InvoicePageState extends State<InvoicePage> {
           body: Column(
             children: <Widget>[
               Expanded(
-                child: ListView.builder(
-                  itemCount: myType.selectedMedicines.length,
-                  itemBuilder: (context, index) {
-                    MedicineModel medicineModel =
-                        myType.selectedMedicines[index];
-                    return Container(
-                      margin: const EdgeInsets.all(8.0),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
-                          ),
-                        ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: myType.selectedMedicines.length,
+                        itemBuilder: (context, index) {
+                          MedicineModel medicineModel =
+                              myType.selectedMedicines[index];
+                          return medicineTile(medicineModel, context);
+                        },
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Assets.drugs.image(height: 30),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            medicineModel.productName,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.5,
-                                            child:
-                                                Text(medicineModel.description),
-                                          ),
-                                          Row(
-                                            children: <Widget>[
-                                              const Text("Unit price: "),
-                                              Text(
-                                                  "Rs " +
-                                                      medicineModel.unitCost
-                                                          .toString(),
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  )),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              const Text("Quantity: "),
-                                              Text(
-                                                  medicineModel.requiredQuantity
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 3.0),
-                                      child: Text("Rs "),
-                                    ),
-                                    Text(
-                                      (int.parse(medicineModel.unitCost) *
-                                              medicineModel.requiredQuantity)
-                                          .toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25),
-                                    ),
-                                  ],
-                                )
-                              ],
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: myType.selectedProcedures.length,
+                        itemBuilder: (context, index) {
+                          ProcedureModel procedureModel =
+                              myType.selectedProcedures[index];
+                          return procedureTile(procedureModel, context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    DropdownButton(
+                      items: procedureList
+                          .map(
+                            (e) => DropdownMenuItem(
+                              child: Text(e),
+                              value: e,
                             ),
-                          ],
+                          )
+                          .toList(),
+                      value: value,
+                      hint: const Text("Select Procedure"),
+                      onChanged: (val) {
+                        value = val as String;
+                        setState(() {});
+                      },
+                    ),
+                    SizedBox(
+                      width: 100,
+                      height: 30,
+                      child: TextField(
+                        controller: _priceController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          hintText: "Price",
                         ),
                       ),
-                    );
-                  },
+                    ),
+                    InkWell(
+                      onTap: () {
+                        myType.addProcedure(
+                          ProcedureModel(
+                            amount: double.parse(_priceController.text),
+                            procedure: value,
+                          ),
+                        );
+                        _priceController.clear();
+                      },
+                      child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 10,
+                          child: Assets.plus.image()),
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -141,15 +125,22 @@ class _InvoicePageState extends State<InvoicePage> {
                       children: <Widget>[
                         const Text("Total amount"),
                         Text(
-                            "Rs ${myType.selectedMedicines.fold(
-                              0,
-                              (int previousValue, element) =>
-                                  previousValue +
-                                  int.parse(element.unitCost) *
-                                      element.requiredQuantity,
-                            )}",
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25)),
+                          "Rs ${myType.selectedMedicines.fold(
+                                0,
+                                (int previousValue, element) =>
+                                    previousValue +
+                                    int.parse(element.unitCost) *
+                                        element.requiredQuantity,
+                              ) + myType.selectedProcedures.fold(
+                                0,
+                                (previousValue, element) =>
+                                    previousValue + element.amount,
+                              )}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
+                        ),
                       ],
                     )),
               ),
